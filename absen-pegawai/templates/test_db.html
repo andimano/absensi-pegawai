@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Database Connection</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Test Database Connection</h1>
+    
+    <h2>Status Koneksi</h2>
+    <p class="success">Koneksi berhasil dengan PostgreSQL versi: {{ version }}</p>
+    
+    <h2>Data Pegawai</h2>
+    <p>Total data pegawai: {{ count }}</p>
+    
+    <h3>Struktur Tabel Pegawai:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Kolom</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for col in columns %}
+            <tr>
+                <td>{{ col.column_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Beberapa Contoh Data Pegawai:</h3>
+    <table>
+        <thead>
+            <tr>
+                {% for col in columns %}
+                <th>{{ col.column_name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in pegawai %}
+            <tr>
+                {% for col in columns %}
+                <td>{{ p[col.column_name] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p><a href="/">Kembali ke Beranda</a></p>
+</body>
+</html>
